@@ -1,0 +1,32 @@
+{
+  "name": "Word of the Day",
+  "version": "0.1.0",
+  "description": "Showing word of the day with description",
+  "permissions": ["declarativeNetRequest", "tabs", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "cors_rules",
+        "enabled": true,
+        "path": "cors-rules.json"
+      }
+    ]
+  },
+  "chrome_url_overrides": {
+     "newtab": "word.html"
+  },
+
+  "action": {
+    "default_icon": {
+      "16": "assets/ext-icon.png",
+      "24": "assets/ext-icon.png",
+      "32": "assets/ext-icon.png"
+    },
+    "default_title": "Word of the Day"
+  },
+  "manifest_version": 3
+}
