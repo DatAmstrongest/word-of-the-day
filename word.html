@@ -27,11 +27,36 @@
             margin-top: 10px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
+        .container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .box {
+            width: 80px;
+            height: 80px;
+            background-color: #3498db;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: sans-serif;
+            transition: transform 0.6s ease-in-out;
+            margin: 0px 10px;
+        }
+        /*
+        .box:hover {
+            transform: perspective(500px) rotateX(180deg);
+        }
+        */    
     </style>
 </head>
 <body>
+    <div class="container">
+    </div>
     <div class="word" id="word-title"></div>
     <div class="description" id="word-description"></div>
+
 </body>
 </html>
 <script src="./fetchWord.js"></script>
