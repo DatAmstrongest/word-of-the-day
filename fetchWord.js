@@ -35,38 +35,44 @@ const getWord = () => {
 }
 
 const createGame = (word) => {
- const word_length =  word.length
- const html_container = document.getElementsByClassName("container").item(0);
- for (var i=0; i<word_length; i++){
-    html_box = document.createElement("div");
-    html_box.classList.add("box")
-    html_box.setAttribute("id", "box"+i);
-    html_container.appendChild(html_box);
- }
-
+  const word_length =  word.length
+  for (var row=0; row<word_length; row++){
+    html_container = document.createElement("div");
+    html_container.classList.add("container");
+    for (var col=0; col<word_length; col++){
+      html_box = document.createElement("div");
+      html_box.classList.add("box")
+      html_box.setAttribute("id", "box"+row+"-"+col);
+      html_container.appendChild(html_box);
+    }
+    document.body.appendChild(html_container);
+  }
 }
 
 
 
 changeBackground();
 getWord();
-var currentIndex = 0;
+
+var currentCol = 0;
+var currentRow = 0;
 document.addEventListener("keydown", function (event) {
     if (event.key == "Backspace"){
-      if (currentIndex != 0){
-          currentIndex -= 1
-          html_box = document.getElementById("box"+currentIndex);
+      if (currentCol != 0){
+          currentCol -= 1
+          html_box = document.getElementById("box"+currentRow+"-"+currentCol);
           html_box.textContent = "";
       }
     }
     else if (event.key == "Enter"){
-      return;
+      currentRow +=1;
+      currentCol = 0;
     }
     else{
-      html_box = document.getElementById("box"+currentIndex);
+      html_box = document.getElementById("box"+currentRow+"-"+currentCol);
       if (html_box != undefined){
         html_box.textContent = event.key;
-        currentIndex += 1;
+        currentCol += 1;
       }
     }
 });
