@@ -35,7 +35,7 @@
         .box {
             width: 80px;
             height: 80px;
-            background-color: #3498db;
+            background-color: rgba(52, 152, 219, 0.5);
             color: white;
             align-items: center;
             justify-content: center;
@@ -48,11 +48,13 @@
             justify-content: center;
             font-size: x-large;
         }
-        /*
-        .box:hover {
-            transform: perspective(500px) rotateX(180deg);
+        .active{
+            background-color: rgb(25, 222, 52);
         }
-        */    
+        
+        .flip {
+            transform: perspective(500px) rotateX(180deg);
+        }  
     </style>
 </head>
 <body>

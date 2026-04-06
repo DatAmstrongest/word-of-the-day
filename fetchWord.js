@@ -1,4 +1,3 @@
-// Making the fetch request
 const changeBackground = () => {
   document.body.style.backgroundImage = "url('./assets/background/background-" + Math.ceil(Math.random() * 9) + ".jpg')";
 }
@@ -6,6 +5,8 @@ const changeBackground = () => {
 const capitalizeFirstLetter = (val) => {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
+
+var target_word = "";
 
 const getWord = () => {
   fetch("https://www.merriam-webster.com/word-of-the-day", {
@@ -26,6 +27,7 @@ const getWord = () => {
         const changed_definition = definition.replace(capitalizeFirstLetter(word), "This word");
         //document.getElementById("word-title").innerHTML = 
         document.getElementById("word-description").innerHTML = changed_definition;
+        target_word = word.toUpperCase();
         createGame(word);
     })
     .catch(error => {
@@ -48,30 +50,50 @@ const createGame = (word) => {
   }
 }
 
-
-
 changeBackground();
 getWord();
 
 var currentCol = 0;
 var currentRow = 0;
-document.addEventListener("keydown", function (event) {
+var guessed_word = "";
+
+document.addEventListener("keydown", async function (event) {
     if (event.key == "Backspace"){
       if (currentCol != 0){
+          guessed_word = guessed_word.substring(0, guessed_word.length-1);
           currentCol -= 1
           html_box = document.getElementById("box"+currentRow+"-"+currentCol);
           html_box.textContent = "";
       }
     }
     else if (event.key == "Enter"){
+      await checkWord();
       currentRow +=1;
       currentCol = 0;
     }
     else{
       html_box = document.getElementById("box"+currentRow+"-"+currentCol);
       if (html_box != undefined){
+        guessed_word += event.key.toUpperCase();
         html_box.textContent = event.key.toUpperCase();
         currentCol += 1;
       }
     }
 });
+
+const  checkWord = async () => {
+  for (var i=0; i<target_word.length; i++){
+    if (target_word.at(i) == guessed_word.at(i)){
+      html_box = document.getElementById("box"+currentRow+"-"+i);
+      html_box.classList.add("flip");
+      await new Promise(r => setTimeout(r, 400));
+      html_box.classList.add("active");
+      await new Promise(r => setTimeout(r, 400));
+    }
+    else{
+      console.log("a")
+    }
+
+  }
+
+}
