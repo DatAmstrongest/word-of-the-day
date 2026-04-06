@@ -9,10 +9,9 @@ const capitalizeFirstLetter = (val) => {
 
 const getWord = () => {
   fetch("https://www.merriam-webster.com/word-of-the-day", {
-    mode: "cors", // Ensures CORS is attempted (though Google may block it)
+    mode: "cors", 
   })
     .then(response => {
-      // Checking if response is successful
       if (response.ok) {
         return response.text();  // Parsing the response body
       } else {
@@ -71,7 +70,7 @@ document.addEventListener("keydown", function (event) {
     else{
       html_box = document.getElementById("box"+currentRow+"-"+currentCol);
       if (html_box != undefined){
-        html_box.textContent = event.key;
+        html_box.textContent = event.key.toUpperCase();
         currentCol += 1;
       }
     }
